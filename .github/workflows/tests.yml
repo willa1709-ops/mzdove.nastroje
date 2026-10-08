@@ -1,0 +1,25 @@
+name: Kontrola výpočtů
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Testy kalkulaček
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stáhnout kód
+        uses: actions/checkout@v4
+      - name: Nastavit Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Spustit automatické testy
+        run: npm test
