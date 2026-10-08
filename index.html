@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Mzdové nástroje – kalkulačka dovolené a připravované mzdové kalkulačky." />
+  <title>Mzdové nástroje | Dovolená</title>
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a href="./" class="brand" aria-label="Mzdové nástroje – úvod"><span class="brand-mark">M</span><span><strong>Mzdové nástroje</strong><small>Praktické kalkulačky pro mzdy a personalistiku</small></span></a>
+      <div class="status" id="law-status" aria-live="polite"></div>
+    </header>
+    <main>
+      <div class="page-heading">
+        <div><p class="eyebrow">KALKULAČKY</p><h1>Dovolená</h1><p class="subheading">Nárok v týdnech i hodinách, s kontrolovatelným postupem výpočtu.</p></div>
+        <label class="year-picker">Výpočtový rok <input id="year" type="number" min="2024" max="2100" step="1" value="2026" /></label>
+      </div>
+      <section class="panel tabs-panel" aria-label="Typ výpočtu">
+        <div class="tab-list" role="tablist" aria-label="Typ výpočtu dovolené">
+          <button type="button" class="tab is-active" role="tab" aria-selected="true" data-mode="new">1. Nový nástup</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-mode="leave">2. Konec PP</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-mode="sick">3. Dlouhodobá nemoc</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-mode="dpp">4. DPP</button>
+        </div>
+      </section>
+      <div class="workspace">
+        <section class="panel input-panel" aria-label="Vstupní údaje">
+          <div class="form-content" id="form-new" data-form="new">
+            <div class="section-heading"><h2>Nový nástup</h2><p>Poměrný nárok od nástupu do konce roku.</p></div>
+            <label class="field"><span>Datum nástupu <em>povinné</em></span><input type="date" id="new-start" /></label>
+            <div class="input-grid">
+              <label class="field"><span>Týdenní úvazek (hod.)</span><input id="new-hours" type="number" min="0.1" max="80" step="0.5" value="40" /></label>
+              <label class="field"><span>Výměra dovolené (týdny)</span><input id="new-weeks" type="number" min="4" max="20" step="0.5" value="4" /></label>
+            </div>
+            <p class="form-footnote">Model: rovnoměrné rozvržení práce na 5 dní v týdnu, bez absencí.</p>
+          </div>
+          <div class="form-content" id="form-leave" data-form="leave" hidden>
+            <div class="section-heading"><h2>Konec PP</h2><p>Nárok do dne skončení pracovního poměru.</p></div>
+            <fieldset class="question"><legend>Nastoupil zaměstnanec letos?</legend><label><input type="radio" name="leave-joined" value="no" checked /> Ne</label><label><input type="radio" name="leave-joined" value="yes" /> Ano</label></fieldset>
+            <label class="field" id="leave-start-wrap"><span>Datum nástupu</span><input type="date" id="leave-start" disabled /><small>Pro odpověď „Ne“ automaticky 1. ledna výpočtového roku.</small></label>
+            <label class="field"><span>Datum ukončení PP <em>povinné</em></span><input type="date" id="leave-end" /></label>
+            <div class="input-grid">
+              <label class="field"><span>Týdenní úvazek (hod.)</span><input id="leave-hours" type="number" min="0.1" max="80" step="0.5" value="40" /></label>
+              <label class="field"><span>Výměra dovolené (týdny)</span><input id="leave-weeks" type="number" min="4" max="20" step="0.5" value="4" /></label>
+            </div>
+            <p class="form-footnote">Výsledek je celkový vzniklý nárok za rok, nikoli zbývající nevyčerpaná dovolená.</p>
+          </div>
+          <div class="form-content" id="form-sick" data-form="sick" hidden>
+            <div class="section-heading"><h2>Dlouhodobá nemoc</h2><p>Vliv dočasné pracovní neschopnosti podle § 216 odst. 2 a 3.</p></div>
+            <div class="input-grid">
+              <label class="field"><span>Datum nástupu <em>nepovinné</em></span><input type="date" id="sick-start" /><small>Prázdné = 1. 1.</small></label>
+              <label class="field"><span>Datum ukončení <em>nepovinné</em></span><input type="date" id="sick-end" /><small>Prázdné = 31. 12.</small></label>
+              <label class="field"><span>Nemoc od <em>povinné</em></span><input type="date" id="sick-from" /></label>
+              <label class="field"><span>Nemoc do <em>povinné</em></span><input type="date" id="sick-to" /></label>
+              <label class="field"><span>Týdenní úvazek (hod.)</span><input id="sick-hours" type="number" min="0.1" max="80" step="0.5" value="40" /></label>
+              <label class="field"><span>Výměra dovolené (týdny)</span><input id="sick-weeks" type="number" min="4" max="20" step="0.5" value="4" /></label>
+            </div>
+            <label class="checkbox"><input type="checkbox" id="sick-accident" /> Pracovní úraz nebo nemoc z povolání</label>
+            <p class="form-footnote">Orientační model pro rovnoměrný pětidenní rozvrh. Nezadávají se další překážky v práci ani skutečné směny; v konkrétní mzdové situaci mohou nárok ovlivnit.</p>
+          </div>
+          <div class="form-content" id="form-dpp" data-form="dpp" hidden>
+            <div class="section-heading"><h2>DPP</h2><p>Dovolená u dohody o provedení práce.</p></div>
+            <div class="input-grid">
+              <label class="field"><span>DPP od <em>povinné</em></span><input type="date" id="dpp-start" /></label>
+              <label class="field"><span>DPP do <em>povinné</em></span><input type="date" id="dpp-end" /></label>
+            </div>
+            <label class="field"><span>Započitatelné hodiny ve výpočtovém roce <em>povinné</em></span><input id="dpp-hours" type="number" min="0" step="0.5" placeholder="Např. 200" /><small>Včetně případných náhradních dob započitatelných pro účely dovolené.</small></label>
+            <label class="field"><span>Výměra dovolené (týdny)</span><input id="dpp-weeks" type="number" min="4" max="20" step="0.5" value="4" /></label>
+            <p class="form-footnote">Pro dovolenou se používá fiktivní týdenní pracovní doba 20 hodin. Dohoda musí v roce trvat alespoň 28 kalendářních dnů a musí být započteno alespoň 80 hodin.</p>
+          </div>
+        </section>
+        <section class="panel output-panel" aria-label="Výsledek" aria-live="polite"><div id="result"><div class="empty-state"><div class="empty-symbol">∑</div><h2>Výsledek výpočtu</h2><p>Vyplňte vstupní údaje. Zobrazíme počet týdenních pracovních dob, dovolenou v týdnech, hodiny a výpočet.</p></div></div></section>
+      </div>
+      <section class="panel more-tools" aria-label="Další připravované kalkulačky">
+        <h2>Další připravované nástroje</h2><div class="future-grid"><div>Pravděpodobný výdělek <span>Plánováno</span></div><div>Exekuce <span>Plánováno</span></div><div>Odstupné <span>Plánováno</span></div><div>Dítě: mateřská, otcovská, rodičovská <span>Plánováno</span></div></div>
+      </section>
+      <footer class="footer">Orientační mzdové kalkulačky · <a href="https://ppropo.mpsv.cz/zakon_262_2006" target="_blank" rel="noopener noreferrer">Zákoník práce (MPSV)</a> · <a href="https://mpsv.gov.cz/novinky-v-pracovnim-pravu" target="_blank" rel="noopener noreferrer">Dovolená u DPP (MPSV)</a></footer>
+    </main>
+  </div>
+</body>
+</html>
