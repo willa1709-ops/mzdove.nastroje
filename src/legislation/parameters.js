@@ -1,0 +1,2 @@
+export const LEGISLATION={2026:{verifiedOn:"2026-10-08",vacationDenominator:52,sicknessOutsideMinimumMultiples:12,sicknessCreditMaxWeeklyMultiples:20,dppFictionalWeeklyHours:20,dppMinimumCalendarDays:28,dppMinimumHours:80,sources:["https://e-sbirka.gov.cz/sb/2006/262","https://ppropo.mpsv.cz/X46Dobyposuzovanejakovykonprace"]}};
+export function paramsFor(year){return LEGISLATION[year]||{...LEGISLATION[2026],verifiedOn:null};}
