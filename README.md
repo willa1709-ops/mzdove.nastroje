@@ -31,7 +31,14 @@ npm test
 
 ## GitHub Pages
 
-Repozitář založte například jako `mzdove-nastroje`. Nahrajte obsah této složky přímo do kořene repozitáře. V **Settings → Pages** zvolte **Deploy from a branch**, hlavní větev `main` a adresář `/ (root)`. Protože jde o statický web, není nutný build.
+Repozitář existuje na [GitHubu](https://github.com/willa1709-ops/mzdove.nastroje) a je soukromý.
+
+V **Settings → Pages** lze případně nastavit **Deploy from a branch**, větev `main`, adresář `/ (root)`. Pro zveřejnění ze soukromého repozitáře je potřeba podporovaný plán GitHub Pro/Team/Enterprise. GitHub Pages web bude obvykle veřejně přístupný, i když samotný repozitář zůstane soukromý. Změna soukromí repozitáře ani publikace se nedělá automaticky.
+
+## Automatické testy
+
+Workflow `.github/workflows/tests.yml` při každém pushi do větve `main` nebo pull requestu spustí `npm test` v Node.js 22. Průběh a výsledek najdete v záložce **Actions** na GitHubu.
+
 
 ## Legislativní parametry
 
