@@ -1,0 +1,13 @@
+import test from "node:test";import assert from "node:assert/strict";import{calculateRegular,calculateSickness,calculateDpp,weekdays}from"../src/dovolena/calculations.js";
+test("Celý rok: 52 týdenních dob, 160 h",()=>{let r=calculateRegular({start:"2026-01-01",end:"2026-12-31"});assert.equal(r.fullMultiples,52);assert.equal(r.hours,160)});
+test("Poměrný nárok od nástupu",()=>{let r=calculateRegular({start:"2026-07-01",end:"2026-12-31"});assert(r.hours>0&&r.hours<160)});
+test("Krátký pracovní poměr nevytváří nárok",()=>assert.equal(calculateRegular({start:"2026-10-01",end:"2026-10-12"}).hours,0));
+test("Dlouhodobá nemoc sníží nárok",()=>{let r=calculateSickness({sicknessFrom:"2026-03-01",sicknessTo:"2026-11-30"});assert(r.differenceHours>0)});
+test("Omezení uznané nemoci na 20 násobků TPD",()=>{let r=calculateSickness({sicknessFrom:"2026-04-01",sicknessTo:"2026-12-31"});assert(r.recognizedMultiples<=20)});
+test("Pracovní úraz: nemoc bez stropu",()=>{let r=calculateSickness({sicknessFrom:"2026-01-01",sicknessTo:"2026-12-31",workAccident:true});assert.equal(r.hours,160)});
+test("Volitelný nástup a konec u nemoci",()=>{let r=calculateSickness({sicknessFrom:"2026-08-01",sicknessTo:"2026-08-31"});assert.equal(r.period.start,"2026-01-01")});
+test("DPP 215 h = 16 h",()=>{let r=calculateDpp({start:"2026-01-01",end:"2026-12-31",creditedHours:215});assert.equal(r.hours,16)});
+test("DPP pod 28 dny = 0",()=>{let r=calculateDpp({start:"2026-01-01",end:"2026-01-20",creditedHours:100});assert.equal(r.hours,0)});
+test("DPP pod 80 h = 0",()=>{let r=calculateDpp({start:"2026-01-01",end:"2026-02-28",creditedHours:79});assert.equal(r.hours,0)});
+test("Obrácené datum je chyba",()=>assert.throws(()=>calculateRegular({start:"2026-10-05",end:"2026-09-01"})));
+test("Pracovní dny",()=>assert.equal(weekdays("2026-10-05","2026-10-09"),5));
