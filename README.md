@@ -8,7 +8,7 @@ První implementovaný nástroj: **Dovolená** se čtyřmi variantami:
 
 1. **Nový nástup** – datum nástupu, týdenní úvazek (výchozí 40 h), výměra dovolené (výchozí 4 týdny).
 2. **Konec PP** – volba „Nastoupil letos?“, datum ukončení, úvazek a výměra.
-3. **Dlouhodobá nemoc (§ 216)** – volitelná data nástupu a ukončení, povinné období nemoci, model započítání 12/20 TPD.
+3. **Dlouhodobá nemoc (§ 216)** – volitelná data nástupu a ukončení, tři připravené řádky pro období nemoci a možnost přidat další. Prázdné řádky se ignorují. U každého období i souhrnně se zobrazí kalendářní dny, pracovní dny a týdny nemoci (pracovní dny / 5). Překryvy se v nároku nepočítají dvakrát; pro kontrolu se uvádí jak prostý součet řádků, tak součet bez překryvů. Model započítání 12/20 TPD zůstává.
 4. **DPP** – termín dohody, započitatelné hodiny, fiktivní TPD 20 hodin a podmínky 28 kalendářních dnů + 80 hodin.
 
 Všechny varianty zobrazují počet **celých započtených týdenních pracovních dob**, **nárok v týdnech dovolené**, **nárok v hodinách** a **dosazený vzorec**. Hodiny se zaokrouhlují nahoru.
@@ -31,9 +31,9 @@ npm test
 
 ## GitHub Pages
 
-Repozitář existuje na [GitHubu](https://github.com/willa1709-ops/mzdove.nastroje) a je soukromý.
+Repozitář je veřejně dostupný na [GitHubu](https://github.com/willa1709-ops/mzdove.nastroje).
 
-V **Settings → Pages** lze případně nastavit **Deploy from a branch**, větev `main`, adresář `/ (root)`. Pro zveřejnění ze soukromého repozitáře je potřeba podporovaný plán GitHub Pro/Team/Enterprise. GitHub Pages web bude obvykle veřejně přístupný, i když samotný repozitář zůstane soukromý. Změna soukromí repozitáře ani publikace se nedělá automaticky.
+V **Settings → Pages** lze případně nastavit **Deploy from a branch**, větev `main`, adresář `/ (root)`. GitHub Pages lze u veřejného repozitáře zapnout bez změny výpočetního kódu.
 
 ## Automatické testy
 
@@ -52,7 +52,7 @@ Pravidla pro rok 2026 zkontrolována 8. 10. 2026 podle:
 
 ### Důležité omezení modelu
 
-U pracovního poměru se bez rozpisu směn počítá s rovnoměrným pětidenním týdnem (každý všední den = 1/5 týdenního úvazku), jinak může výsledek nesouhlasit. Není řešena nepravidelná práce, změny úvazku během roku, různé další započitatelné doby, přesčasové dopady ani specifické individuální případy. U nemoci jsou zohledněny jen zadané intervaly, nikoli kombinace s jinými překážkami podle § 216. Zobrazené „snížení nároku“ není krácením dovolené podle § 223.
+U pracovního poměru se bez rozpisu směn počítá s rovnoměrným pětidenním týdnem (každý všední den = 1/5 týdenního úvazku) včetně svátků, pokud připadnou na všední den; zákonný nárok tak může být jiný. U více období nemoci jsou kalendářní dny počítány včetně obou dat, ale počty období jsou omezeny na vybraný rok a trvání zaměstnání. Není řešena nepravidelná práce, změny úvazku během roku, různé další započitatelné doby, přesčasové dopady ani specifické individuální případy. U nemoci jsou zohledněny jen zadané intervaly, nikoli kombinace s jinými překážkami podle § 216. Zobrazené „snížení nároku“ není krácením dovolené podle § 223.
 
 **Nástroj je pracovní prototyp, nikoli plně ověřený mzdový software. Před praktickým nasazením je nutné validovat skutečnou evidenci směn, absencí a hraniční situace.**
 
