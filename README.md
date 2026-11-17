@@ -11,7 +11,7 @@ První implementovaný nástroj: **Dovolená** se čtyřmi variantami:
 3. **Dlouhodobá nemoc (§ 216)** – volitelná data nástupu a ukončení, tři připravené řádky pro období nemoci a možnost přidat další. Prázdné řádky se ignorují. U každého období i souhrnně se zobrazí kalendářní dny, pracovní dny a týdny nemoci (pracovní dny / 5). Překryvy se v nároku nepočítají dvakrát; pro kontrolu se uvádí jak prostý součet řádků, tak součet bez překryvů. Model započítání 12/20 TPD zůstává.
 4. **DPP** – termín dohody, započitatelné hodiny, fiktivní TPD 20 hodin a podmínky 28 kalendářních dnů + 80 hodin.
 
-Všechny varianty zobrazují počet **celých započtených týdenních pracovních dob**, **nárok v týdnech dovolené**, **nárok v hodinách** a **dosazený vzorec**. Hodiny se zaokrouhlují nahoru.
+Všechny varianty zobrazují **přepočet nároku na modelové dny dovolené** výrazněji než týdny, dále zákonný **nárok v hodinách**, počet **celých započtených týdenních pracovních dob** a dosazený vzorec. Hodnoty se pro přehled zobrazují na **dvě desetinná místa**, aniž by se mezivýsledky předčasně zaokrouhlovaly; zákonný nárok na dovolenou v hodinách se zaokrouhluje nahoru na celé hodiny. Přepočet na dny používá 5 stejně dlouhých modelových směn za týden. U DPP jde o **fiktivní ekvivalent**, nikoli skutečný počet dní čerpání podle rozvrhu.
 
 ## Spuštění
 
