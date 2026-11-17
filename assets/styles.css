@@ -32,3 +32,14 @@
 .sickness-table tbody tr.sum-row .week-cell,.sickness-table tbody tr.unique-row .week-cell{font-weight:500;color:#6b788d}
 .sickness-table tbody tr.unique-row .day-cell{font-size:18px}
 @media(max-width:420px){.sickness-day-stat{padding:12px 9px}.sickness-day-stat span{font-size:12px}}
+
+/* All four calculator modes: leave days first, weeks as a supporting value. */
+.results-days-first{background:#eaf2ff;border:1px solid #bfd4f0;padding:16px}
+.results-days-first .result-number{min-width:0}
+.results-days-first .result-days strong{font-size:clamp(29px,4vw,40px);font-weight:800;letter-spacing:-.03em;color:#173d7a;font-variant-numeric:tabular-nums;line-height:1.18}
+.results-days-first .result-hours strong{font-size:clamp(20px,2.9vw,30px);font-weight:700;line-height:1.35;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.results-days-first .result-number span{display:block;color:#435b7b;line-height:1.4;margin-top:4px;font-size:12px}
+.results-weeks{color:#697a90;font-size:12px;margin:8px 2px 10px;line-height:1.5}
+.results-weeks strong{font-weight:600;font-variant-numeric:tabular-nums}
+.weeks-inline{color:#66758a;font-size:12px;font-weight:400}
+@media(max-width:420px){.results-days-first{gap:8px;padding:12px}.results-days-first .result-days strong{font-size:clamp(24px,7vw,34px)}.results-days-first .result-hours strong{font-size:clamp(18px,5vw,24px)}}
