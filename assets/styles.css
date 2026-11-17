@@ -18,3 +18,17 @@
 .sickness-table thead th{color:#5c6c80;font-size:11px}
 .sickness-table tbody tr.sum-row{font-weight:700;background:#eaf2ff}
 .sickness-table tbody tr.unique-row{font-weight:700;background:#fff6e7}
+
+/* In the sickness view, days are the primary figures; weeks are auxiliary. */
+.sickness-day-overview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0 8px}
+.sickness-day-stat{border:1px solid #bdd3f4;border-radius:12px;background:#eaf2ff;padding:16px 12px}
+.sickness-day-stat strong{display:block;font-size:clamp(30px,4vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1.1;font-variant-numeric:tabular-nums;color:#173d7a}
+.sickness-day-stat span{display:block;margin-top:5px;font-size:13px;font-weight:650;color:#355b8b}
+.sickness-weeks-secondary{margin:4px 0 24px;color:#66758a;font-size:12px;line-height:1.5}
+.sickness-table .day-cell{font-size:17px;font-weight:750;color:#193f75;font-variant-numeric:tabular-nums}
+.sickness-table .week-cell{font-size:12px;font-weight:450;color:#708097}
+.sickness-table .table-subtle{font-weight:400;color:#8190a5}
+.sickness-table tbody tr.sum-row .day-cell{font-size:20px}
+.sickness-table tbody tr.sum-row .week-cell,.sickness-table tbody tr.unique-row .week-cell{font-weight:500;color:#6b788d}
+.sickness-table tbody tr.unique-row .day-cell{font-size:18px}
+@media(max-width:420px){.sickness-day-stat{padding:12px 9px}.sickness-day-stat span{font-size:12px}}
